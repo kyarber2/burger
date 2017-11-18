@@ -17,6 +17,8 @@ var app = express();
 
 app.use(express.static(__dirname + "/public"))
 
+app.use(bodyParser.urlencoded({ extended: false }))
+
 app.use(methodOverrride("_method"))
 var exphbs = require("express-handlebars")
 
@@ -26,6 +28,7 @@ app.set("view engine", "handlebars")
 var routes = require("./controllers/burgers_controllers")
 
 app.use("/", routes)
+app.use('/update', routes)
 
 app.listen(PORT, function() {
 	console.log("Listening on port:%s", PORT)

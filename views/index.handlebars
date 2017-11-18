@@ -8,30 +8,37 @@
 
 <ul>
   {{#each burgerData}}
-    {{#unless devoured}}
-     {{!--  {{> burgerData/burger-block devoured=true}} --}}
+    {{#unless this.devoured}}
+     <pre>
+      {{this.id}} {{this.burger_name}}
+     </pre>
+        <div> 
+            <form method="POST" action="/api/burgers/update?_method=PUT">
+                <input type="hidden" type="text" name="id" value={{this.id}}>
+                <button type="submit">Devour!!1one</button>
+            </form>
+        </div>
     {{/unless}}
   {{/each}}
 </ul>
 
 {{!-- <h2>Burgers that have been eaten</h2> --}}
-
+<h2>BURGERS DEVOURERERED</h2>
 <ul>
   {{#each burgerData}}
-    {{#if devoured}}
-      {{> burgerData/burger-block devoured=false}}
+    {{#if this.devoured}}
+      <input class="form-control" type="text" placeholder="{{this.id}}, {{this.burger_name}}" readonly>
     {{/if}}
   {{/each}}
 </ul>
 
-<h2>Add a Burger</h2>
- <p> Burger: {{burger.name}}</p>
-<form class="create-form">
 
+<form class="create-form" action="/api/burgers" method="POST">
+  <h2>Add a Burger</h2>
 
   <div class="form-group">
     <label for="ca">Burger Name:</label>
-    <input type="text" id="burgerName" name="name">
+    <input type="text" id="burgerName" name="burger_name">
   </div>
  
 
